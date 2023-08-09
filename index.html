@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Input and Local Storage</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>Hi! Daniel Gudino</header>
+      <div class="quote">QUOTE</div>
+      <div class="todo">
+        <input type="text" id="inputBox1" placeholder="Enter your first to-do" />
+        <button onclick="saveInput(1)">Save</button>
+      </div>
+      <div class="todo">
+        <input type="text" id="inputBox2" placeholder="Enter your second to-do" />
+        <button onclick="saveInput(2)">Save</button>
+      </div>
+      <div class="todo">
+        <input type="text" id="inputBox3" placeholder="Enter your third to-do" />
+        <button onclick="saveInput(3)">Save</button>
+      </div>
+      <div class="todo">
+        <input type="text" id="inputBox4" placeholder="Enter your fourth to-do" />
+        <button onclick="saveInput(4)">Save</button>
+      </div>
+      <div class="todo">
+        <input type="text" id="inputBox5" placeholder="Enter your fifth to-do" />
+        <button onclick="saveInput(5)">Save</button>
+      </div>
+      <footer class="constant">
+        <div>
+          <p>CONSTANT GOAL</p>
+        </div>
+        <div>
+          <p>CONSTANT GOAL</p>
+        </div>
+        <div>
+          <p>CONSTANT GOAL</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      function saveInput(num) {
+        var input = document.getElementById("inputBox" + num).value;
+        localStorage.setItem("userInput" + num, input);
+        alert("Input " + num + " saved to local storage!");
+      }
+    </script>
+  </body>
+</html>
