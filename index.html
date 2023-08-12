@@ -3,52 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Input and Local Storage</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>TimeWise</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   </head>
 
-  <body>
-    <div class="container">
-      <header>Hi! Daniel Gudino</header>
-      <div class="quote">QUOTE</div>
-      <div class="todo">
-        <input type="text" id="inputBox1" placeholder="Enter your first to-do" />
-        <button onclick="saveInput(1)">Save</button>
+
+
+  <!-- this section handles the to do's along with the header and quote -->
+
+  <body class="flex justify-center items-center h-screen bg-indigo-200">
+    <div class="container mx-auto">
+      <header class="text-center py-4 text-2xl font-bold ">Hi! Daniel Gudino</header>
+      <div class="quote italic text-center mb-4 text-lg ">QUOTE</div>
+      <div class="todo flex justify-between items-center mt-12 mb-10">
+        <input type="text" id="inputBox1" placeholder="Enter your first to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+        <button id="saveButton1" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
       </div>
-      <div class="todo">
-        <input type="text" id="inputBox2" placeholder="Enter your second to-do" />
-        <button onclick="saveInput(2)">Save</button>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox2" placeholder="Enter your second to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+        <button id="saveButton2" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
       </div>
-      <div class="todo">
-        <input type="text" id="inputBox3" placeholder="Enter your third to-do" />
-        <button onclick="saveInput(3)">Save</button>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox3" placeholder="Enter your third to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+        <button id="saveButton3" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
       </div>
-      <div class="todo">
-        <input type="text" id="inputBox4" placeholder="Enter your fourth to-do" />
-        <button onclick="saveInput(4)">Save</button>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox4" placeholder="Enter your Fourth to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+        <button id="saveButton4" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
       </div>
-      <div class="todo">
-        <input type="text" id="inputBox5" placeholder="Enter your fifth to-do" />
-        <button onclick="saveInput(5)">Save</button>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox5" placeholder="Enter your Fifth to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+        <button id="saveButton5" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
       </div>
-      <footer class="constant">
-        <div>
-          <p>CONSTANT GOAL</p>
+      
+      <!-- this section handles the 3 containers in the bottom of the page  -->
+      
+      <div class="priorities flex justify-between items-center mb-10 bg-blue-500">
+        <div class="border p-4 m-4 rounded-lg shadow-sm ">
+          <p class="text-lg font-bold">Meals</p>
+          <input type="text" id="mealInput" placeholder="Enter your meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <input type="text" id="mealInput2" placeholder="Enter your second meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <input type="text" id="mealInput3" placeholder="Enter your third meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <button id="mealSaveButton" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
         </div>
-        <div>
-          <p>CONSTANT GOAL</p>
+        <div class="border p-4 m-4 rounded-lg shadow-sm">
+          <p class="text-lg font-bold">Exercise</p>
+          <input type="text" id="exerciseInput" placeholder="Enter your exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <input type="text" id="exerciseInput2" placeholder="Enter your second exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <input type="text" id="exerciseInput3" placeholder="Enter your third exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <button id="exerciseSaveButton" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
         </div>
-        <div>
-          <p>CONSTANT GOAL</p>
+        <div class="border p-4 m-4 rounded-lg shadow-sm">
+          <p class="text-lg font-bold">Important Time</p>
+          <input type="text" id="timeInput" placeholder="Enter your important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <input type="text" id="timeInput2" placeholder="Enter your second important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <input type="text" id="timeInput3" placeholder="Enter your third important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+          <button id="timeSaveButton" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
         </div>
-      </footer>
+      </div>
     </div>
-    <script>
-      function saveInput(num) {
-        var input = document.getElementById("inputBox" + num).value;
-        localStorage.setItem("userInput" + num, input);
-        alert("Input " + num + " saved to local storage!");
-      }
-    </script>
+
+   <script src="script.js"></script>
   </body>
 </html>
+
+ <!--to do: please move the quote and header to the top of the page and the 5 to do's to the bottom. If it doesnt look visually appealing change it back to it's original state. -->
+ <!--In the process of changing the size of the boxes in both the to-do's and the priorities section-->
+ <!--Consult with the group on the color palette of the page-->
+
+ <!--Idea: add a section that displays how much water you are supposed to drink-->
