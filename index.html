@@ -1,20 +1,98 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>OpenWeather API</title>
-    </head>
-    <body>
-        <h1>Nearest City Finder</h1>
-        <p>Nearest City: <span id="nearestCity"></span></p>
-        <p>Latitude: <span id="latitude"></span></p>
-        <p>Longitude: <span id="longitude"></span></p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TimeWise</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-        <h1>Current Weather:</h1>
-        <p>City: <span id="city"></span></p>
-        <p>Temperature: <span id="temperature"></span></p>
-        <p>Weather: <span id="weather"></span></p>
+
+
+  <!-- this section handles the to do's along with the header and quote -->
+
+  <body class="flex justify-center items-center h-screen bg-indigo-200">
+    <div class="background-image"></div> <!-- Create a separate div for the background image -->
+    <div class="background-overlay"></div>
+
+    <div class="flex justify-center items-center h-screen">
+      <div class="container mx-auto relative z-10">
+        <header class="text-center py-4 text-2xl font-bold">Hi! Daniel Gudino</header>
+        <div class="quote italic text-center mb-4 text-lg font-bold" id="quote">Loading Quote...</div>
+        <div class="quote italic text-center mb-4 text-lg font-bold" id="Weather">Todays Weather Feels Like...</div>
         
-        <script src="./assets/js/script.js"></script>
-    </body>
+        <div class="todo flex justify-between items-center mt-12 mb-10">
+          <input type="text" id="inputBox1" placeholder="Enter your first to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <button id="saveButton1" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+          <button type="button" id="completeButton1" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+        </div>
+        <div class="todo flex justify-between items-center mt-12 mb-10">
+          <input type="text" id="inputBox2" placeholder="Enter your first to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <button id="saveButton2" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+          <button type="button" id="completeButton2" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+        </div>        
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox3" placeholder="Enter your second to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+        <button id="saveButton3" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+        <button type="button" id="completeButton3" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+      </div>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox4" placeholder="Enter your third to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+        <button id="saveButton4" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+        <button type="button" id="completeButton4" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+      </div>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox5" placeholder="Enter your Fourth to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+        <button id="saveButton5" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+        <button type="button" id="completeButton5" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+      </div>
+      <div class="todo flex justify-between items-center mb-10">
+        <input type="text" id="inputBox6" placeholder="Enter your Fifth to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+        <button id="saveButton6" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+        <button type="button" id="completeButton6" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+      </div>
+      
+      <!-- this section handles the 3 containers in the bottom of the page  -->
+      
+      <div class="priorities flex justify-between items-center mb-10">
+        <div class="border p-4 m-4 rounded-lg shadow-sm">
+          <p class="text-lg font-bold">Meals</p>
+          <input type="text" id="inputBox7" placeholder="Enter your meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <input type="text" id="inputBox8" placeholder="Enter your second meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <input type="text" id="inputBox9" placeholder="Enter your third meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <button id="saveButton7" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+          <button type="button" id="completeButton789" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+        </div>      
+        <div class="border p-4 m-4 rounded-lg shadow-sm">
+          <p class="text-lg font-bold">Exercise</p>
+          <input type="text" id="inputBox10" placeholder="Enter your exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <input type="text" id="inputBox11" placeholder="Enter your second exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <input type="text" id="inputBox12" placeholder="Enter your third exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <button id="saveButton8" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+          <button type="button" id="completeButton101112" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+        </div>        
+        <div class="border p-4 m-4 rounded-lg shadow-sm">
+          <p class="text-lg font-bold">Important Time</p>
+          <input type="text" id="inputBox13" placeholder="Enter your important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <input type="text" id="inputBox14" placeholder="Enter your second important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <input type="text" id="inputBox15" placeholder="Enter your third important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
+          <button id="saveButton9" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
+          <button type="button" id="completeButton131415" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+        </div>
+      </div>
+    </div>
+
+   <script src="script.js"></script>
+  </body>
 </html>
+
+<!-- To Do: make the image fill the whole screen ( there a margin on the bottom that doesnt allow for the image to fill the screen ) -->
+<!-- To Do: give 'complete' buttons unique id's so that when pressed it doesn't access other sections in the page  -->
+<!-- issue: the first 3 To-do's arent saving information to local storage but the others are -->
+<!-- Goal: when the user finishes a to-do he presses the complete button and it slashes out, but if the user wants to bring back that to-do he can press the complete button to take out the slash and then hit the save button to save that to local storage  -->
+<!-- idea: I want to add small emoji cons of cups that that have javascript functions that display cups with water but once the user drinks water he can click on the cup and it will then turn empty -->
+
+<!-- As i was typing that I realized you can probably make it so that the 'complete' button has no connection to local storage so that it's only purpose is to create that slash -->
+
+<!-- warren I added a section so that you can add the api  -->
