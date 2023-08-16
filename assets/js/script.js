@@ -57,6 +57,32 @@ async function loadWeatherAndQuote() {
         console.error('La geolocalización no es compatible con este navegador.');
     }
 }
+// Get the theme toggle element
+const themeToggle = document.getElementById('theme-toggle');
+
+// Add a click event listener to the theme toggle button
+themeToggle.addEventListener('click', () => {
+    // Toggle between dark and light themes on the document body
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.toggle('light-theme');
+
+    // Determine the current theme and save it in localStorage
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    try {
+        localStorage.setItem('theme', currentTheme);
+    } catch (error) {
+        console.error('Failed to save theme preference:', error);
+    }
+});
+
+// Retrieve the user's preferred theme from localStorage
+const savedTheme = localStorage.getItem('theme');
+
+// Check if a preferred theme is stored and apply it to the document body
+if (savedTheme) {
+    document.body.classList.add(savedTheme + '-theme');
+}
+
 
 
 const addTaskButton = document.getElementById("addTaskButton");
