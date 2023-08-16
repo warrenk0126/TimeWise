@@ -10,18 +10,20 @@ async function getWeatherDataByLocation(latitude, longitude) {
 
 function displayCurrentWeather(weatherData) {
     const currentWeatherDiv = document.getElementById('current-weather');
+    const temperatureCelsius = weatherData.main.temp;
+    const temperatureFahrenheit = Math.round((temperatureCelsius * 9/5) + 32);
+
     currentWeatherDiv.innerHTML = `
         <div class="weather-card">
             <h2 class="text-3xl">${weatherData.name} (${new Date(weatherData.dt * 1000).toLocaleDateString()})</h2>
             <img class="mx-auto" src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="weather icon">
-            <p><span class="font-bold">Temperature:</span> ${weatherData.main.temp}°C</p>
-            <p><span class="font-bold">Feels like:</span> ${weatherData.main.feels_like}°C</p>
+            <p><span class="font-bold">Temperature:</span> ${temperatureFahrenheit}°F</p>
+            <p><span class="font-bold">Feels like:</span> ${Math.round((weatherData.main.feels_like * 9/5) + 32)}°F</p>
             <p><span class="font-bold">Humidity:</span> ${weatherData.main.humidity}%</p>
             <p><span class="font-bold">Wind Speed:</span> ${weatherData.wind.speed}m/s</p>
         </div>
     `;
 }
-
 
 async function loadWeatherAndQuote() {
     if (navigator.geolocation) {
@@ -160,6 +162,7 @@ addNoteButton.addEventListener("click", () => {
     noteModal.classList.remove("hidden");
 });
 
+
 saveNoteButton.addEventListener("click", () => {
     const noteText = noteTextarea.value;
     const type = typeSelect.value;
@@ -216,9 +219,20 @@ notesAndIdeasList.addEventListener("click", (event) => {
     }
 });
 
+// Added 'Close' button for Notes & Ideas
+const closeNoteModalButton = document.getElementById("closeNoteModal");
 
+closeNoteModalButton.addEventListener("click", () => {
+    noteModal.classList.add("hidden");
+    noteTextarea.value = "";
+    typeSelect.value = "note";
+});
 
-
-
-
-
+// Added 'Close' button for Task List
+const closeTaskModalButton = document.getElementById("closeTaskModal");
+closeTaskModalButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    taskNameInput.value = "";
+    prioritySelect.value = "most_important";
+    statusSelect.value = "not_started";
+});
