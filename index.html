@@ -1,102 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TimeWiseDaniel2</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="style.css">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./assets/css/styles.css">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <title>TimeWise</title>
   </head>
+  <body>
+    <div class="container mx-auto p-4">
+        <div class="container text-center">
+            <div class="weather-section">
+                <div id="current-weather" class="weather-card">
+                    <!-- Here show the current weather -->
+                </div>
+            </div>
+            <hr>
+            <div class="quote-section">
+                <div id="motivationalQuote" class="quote">
+                    <!-- here show the motivational quote -->
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- <div class="container mx-auto p-4">
+        <div class="w-1/2">
+            <div class="max-w-md bg-white p-6 rounded shadow-md">
+                <h1 class="text-2xl font-semibold mb-4">Task List</h1>
+                <button id="addTaskButton" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Add Task</button>
 
+                <div id="taskList" class="space-y-2 w-full"></div>
+            </div>
+        </div>
+    </div> -->
 
-  <!-- this section handles the to do's along with the header and quote -->
+    <div class="container mx-auto p-4 flex">
+        <!-- Lista de tareas -->
+        <div class="w-1/2">
+            <div class="max-w-md bg-white p-6 rounded shadow-md">
+                <h1 class="text-2xl font-semibold mb-4">Task List</h1>
+                <button id="addTaskButton" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Add Task</button>
 
-  <body class="flex justify-center items-center h-screen bg-indigo-200">
-    <div class="background-image"></div> <!-- Create a separate div for the background image -->
-    <div class="background-overlay"></div>
-
-    <div class="flex justify-center items-center h-screen">
-      <div class="container mx-auto relative z-10">
-        <header class="text-center py-4 text-2xl font-bold">Hi! Daniel Gudino</header>
-        <div class="quote italic text-center mb-4 text-lg font-bold" id="quote">Loading Quote...</div>
-        <div class="quote italic text-center mb-4 text-lg font-bold" id="weather">
-          <p id="weatherDesc" class="inline-block"></p>
-          <p id="city" class="inline-block ml-2"></p>
-          <p id="temperature" class="inline-block ml-2"></p>
+                <div id="taskList" class="space-y-2 w-full"></div>
+            </div>
         </div>
         
-        <div class="todo flex justify-between items-center mt-12 mb-10">
-          <input type="text" id="inputBox1" placeholder="Enter your first to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <button id="saveButton1" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-          <button type="button" id="completeButton1" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
+        <!-- Lista de notas e ideas -->
+        <div class="w-1/2 ml-4">
+            <div class="max-w-md bg-white p-6 rounded shadow-md">
+                <h1 class="text-2xl font-semibold mb-4">Notes & Ideas</h1>
+                <button id="addNoteButton" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Add Note/Idea</button>
+
+                <div id="notesAndIdeasList" class="space-y-2 w-full"></div>
+            </div>
         </div>
-        <div class="todo flex justify-between items-center mt-12 mb-10">
-          <input type="text" id="inputBox2" placeholder="Enter your first to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <button id="saveButton2" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-          <button type="button" id="completeButton2" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-        </div>        
-      <div class="todo flex justify-between items-center mb-10">
-        <input type="text" id="inputBox3" placeholder="Enter your second to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-        <button id="saveButton3" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-        <button type="button" id="completeButton3" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-      </div>
-      <div class="todo flex justify-between items-center mb-10">
-        <input type="text" id="inputBox4" placeholder="Enter your third to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-        <button id="saveButton4" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-        <button type="button" id="completeButton4" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-      </div>
-      <div class="todo flex justify-between items-center mb-10">
-        <input type="text" id="inputBox5" placeholder="Enter your Fourth to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-        <button id="saveButton5" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-        <button type="button" id="completeButton5" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-      </div>
-      <div class="todo flex justify-between items-center mb-10">
-        <input type="text" id="inputBox6" placeholder="Enter your Fifth to-do" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-        <button id="saveButton6" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-        <button type="button" id="completeButton6" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-      </div>
-      
-      <!-- this section handles the 3 containers in the bottom of the page  -->
-      
-      <div class="priorities flex justify-between items-center mb-10">
-        <div class="border p-4 m-4 rounded-lg shadow-sm">
-          <p class="text-lg font-bold">Meals</p>
-          <input type="text" id="inputBox7" placeholder="Enter your meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <input type="text" id="inputBox8" placeholder="Enter your second meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <input type="text" id="inputBox9" placeholder="Enter your third meal" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <button id="saveButton7" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-          <button type="button" id="completeButton789" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-        </div>      
-        <div class="border p-4 m-4 rounded-lg shadow-sm">
-          <p class="text-lg font-bold">Exercise</p>
-          <input type="text" id="inputBox10" placeholder="Enter your exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <input type="text" id="inputBox11" placeholder="Enter your second exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <input type="text" id="inputBox12" placeholder="Enter your third exercise" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <button id="saveButton8" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-          <button type="button" id="completeButton101112" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-        </div>        
-        <div class="border p-4 m-4 rounded-lg shadow-sm">
-          <p class="text-lg font-bold">Important Time</p>
-          <input type="text" id="inputBox13" placeholder="Enter your important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <input type="text" id="inputBox14" placeholder="Enter your second important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <input type="text" id="inputBox15" placeholder="Enter your third important time" class="w-full h-10 border border-gray-400 px-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent font-bold" />
-          <button id="saveButton9" class="w-20 h-10 bg-green-500 text-white rounded-lg cursor-pointer hover:bg-green-600">Save</button>
-          <button type="button" id="completeButton131415" class="w-20 h-10 bg-gray-300 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-400">Complete</button>
-        </div>
+    </div>
+
+    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded shadow-md w-80">
+            <h2 class="text-xl font-semibold mb-4">Add Task</h2>
+            <input id="taskName" type="text" class="border rounded mb-2 p-2 w-full" placeholder="Task Name">
+
+            <select id="priority" class="border rounded mb-2 p-2 w-full">
+                <option value="most_important">Most Important Task</option>
+                <option value="secondary">Secondary Task</option>
+                <option value="additional">Additional Task</option>
+            </select>
+
+            <select id="status" class="border rounded mb-4 p-2 w-full">
+                <option value="not_started">Not Started</option>
+                <option value="completed">Completed</option>
+                <option value="delegate">Delegate</option>
+                <option value="delete">Delete</option>
+                <option value="in_progress">In Progress</option>
+            </select>
+
+            <button id="saveTask" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Save Task</button>
+
+            <!-- 'Close' button added for Task List -->
+            <button id="closeTaskModal" class="bg-gray-500 text-white py-2 px-4 rounded w-full mt-2">Close</button>
+          </div>
+    </div>
+
+    <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <div class="bg-white p-6 rounded shadow-md w-80">
+        <h2 class="text-xl font-semibold mb-4">Edit Task</h2>
+          <input id="editTaskName" type="text" class="border rounded mb-2 p-2 w-full" placeholder="Task Name">
+
+          <select id="editPriority" class="border rounded mb-2 p-2 w-full">
+            <option value="most_important">Most Important Task</option>
+            <option value="secondary">Secondary Task</option>
+            <option value="additional">Additional Task</option>
+          </select>
+
+          <select id="editStatus" class="border rounded mb-4 p-2 w-full">
+            <option value="not_started">Not Started</option>
+            <option value="completed">Completed</option>
+            <option value="delegate">Delegate</option>
+            <option value="delete">Delete</option>
+            <option value="in_progress">In Progress</option>
+          </select>
+
+          <button id="updateTask" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Update Task</button>
       </div>
     </div>
 
-   <script src="./assets/js/script.js"></script>
+    <div id="noteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <div class="bg-white p-6 rounded shadow-md w-80">
+        <h2 class="text-xl font-semibold mb-4">Add Note or Idea</h2>
+        <textarea id="noteTextarea" class="border rounded mb-2 p-2 w-full" placeholder="Note or Idea"></textarea>
+        <select id="type" class="border rounded mb-4 p-2 w-full">
+          <option value="note">Note</option>
+          <option value="idea">Idea</option>
+        </select>
+        <button id="saveNote" class="bg-green-500 text-white py-2 px-4 rounded w-full">Save Note or Idea</button>
+
+        <!-- 'Close' button added for Notes & Ideas -->
+        <button id="closeNoteModal" class="bg-gray-500 text-white py-2 px-4 rounded w-full mt-2">Close</button>
+      </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
-
-<!-- To Do: make the image fill the whole screen ( there a margin on the bottom that doesnt allow for the image to fill the screen ) -->
-<!-- To Do: give 'complete' buttons unique id's so that when pressed it doesn't access other sections in the page  -->
-<!-- issue: the first 3 To-do's arent saving information to local storage but the others are -->
-<!-- Goal: when the user finishes a to-do he presses the complete button and it slashes out, but if the user wants to bring back that to-do he can press the complete button to take out the slash and then hit the save button to save that to local storage  -->
-<!-- idea: I want to add small emoji cons of cups that that have javascript functions that display cups with water but once the user drinks water he can click on the cup and it will then turn empty -->
-
-<!-- As i was typing that I realized you can probably make it so that the 'complete' button has no connection to local storage so that it's only purpose is to create that slash -->
-
-<!-- warren I added a section so that you can add the api  -->

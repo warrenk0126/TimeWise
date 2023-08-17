@@ -1,112 +1,254 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const saveButtonHandlers = [
-      { buttonId: 'saveButton1', inputIds: ['inputBox1'] },
-      { buttonId: 'saveButton2', inputIds: ['inputBox2'] },
-      { buttonId: 'saveButton3', inputIds: ['inputBox3'] },
-      { buttonId: 'saveButton4', inputIds: ['inputBox4'] },
-      { buttonId: 'saveButton5', inputIds: ['inputBox5'] },
-      { buttonId: 'saveButton6', inputIds: ['inputBox6'] },
-      { buttonId: 'saveButton7', inputIds: ['inputBox7', 'inputBox8', 'inputBox9'] },
-      { buttonId: 'saveButton8', inputIds: ['inputBox10', 'inputBox11', 'inputBox12'] },
-      { buttonId: 'saveButton9', inputIds: ['inputBox13', 'inputBox14', 'inputBox15'] }
-    ];
-  
-    saveButtonHandlers.forEach(handler => {
-      const saveButton = document.getElementById(handler.buttonId);
-      saveButton.addEventListener('click', () => {
-        handler.inputIds.forEach(inputId => {
-          const inputValue = document.getElementById(inputId).value;
-          localStorage.setItem(inputId, inputValue);
-        });
-      });
-    });
-  
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-      const savedValue = localStorage.getItem(input.id);
-      if (savedValue) {
-        input.value = savedValue;
-      }
-    });
-  
-    const completeButtons = document.querySelectorAll('[id^="completeButton"]');
-    completeButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const todoIndex = button.id.slice(-1);
-        const inputBox = document.getElementById(`inputBox${todoIndex}`);
-        inputBox.classList.toggle('completed');
-  
-        const completedToDos = JSON.parse(localStorage.getItem('completedToDos')) || [];
-        if (inputBox.classList.contains('completed')) {
-          completedToDos.push(todoIndex);
-        } else {
-          const indexToRemove = completedToDos.indexOf(todoIndex);
-          if (indexToRemove !== -1) {
-            completedToDos.splice(indexToRemove, 1);
-          }
-        }
-        localStorage.setItem('completedToDos', JSON.stringify(completedToDos));
-  
-        // Update input value in local storage if saved after completing
-        const saveButtonHandler = saveButtonHandlers.find(handler => handler.inputIds.includes(inputBox.id));
-        if (saveButtonHandler) {
-          const inputValue = inputBox.value;
-          localStorage.setItem(inputBox.id, inputValue);
-        }
-      });
-    });
-  
-    const completedToDos = JSON.parse(localStorage.getItem('completedToDos')) || [];
-    completedToDos.forEach(todoIndex => {
-      const inputBox = document.getElementById(`inputBox${todoIndex}`);
-      inputBox.classList.add('completed');
-    });
-  
-    //////////////////////
-    // Warren's section //
-    //////////////////////
-  
-    function displayWeatherDescAndCityName(temperature, cityName, weatherDesc) {
-        var weatherElement = document.getElementById('weatherDesc');
-        var cityElement = document.getElementById('city');
-        var temperatureElement = document.getElementById('temperature');
+const apiKey = 'b8e76533d49342768241dd6ce39ca8e7';
+const quotesApiKey = '6hjR+Z+iplIV9VL+StaaLg==jQnN6wcPkiNSWZDy';
 
-        weatherElement.textContent = `It's currently ${temperature}°F in ${cityName} with ${weatherDesc}.`;
-        cityElement.textContent = '';
-        temperatureElement.textContent = '';
-    }
+async function getWeatherDataByLocation(latitude, longitude) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
 
-    function getNearestCity() {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
+function displayCurrentWeather(weatherData) {
+    const currentWeatherDiv = document.getElementById('current-weather');
+    const temperatureFahrenheit = Math.round(weatherData.main.temp);
 
-                    var apiKey = '90cd0f7c8cafa3d1735247cccfc01c6d';
-                    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+    currentWeatherDiv.innerHTML = `
+        <div class="weather-card">
+            <h2 class="text-3xl">${weatherData.name} (${new Date(weatherData.dt * 1000).toLocaleDateString()})</h2>
+            <img class="mx-auto" src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="weather icon">
+            <p><span class="font-bold">Temperature:</span> ${temperatureFahrenheit}°F</p>
+            <p><span class="font-bold">Feels like:</span> ${Math.round(weatherData.main.feels_like)}°F</p> 
+            <p><span class="font-bold">Humidity:</span> ${weatherData.main.humidity}%</p>
+            <p><span class="font-bold">Wind Speed:</span> ${weatherData.wind.speed}m/s</p>
+        </div>
+    `;
+}
 
-                    fetch(apiUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            var cityName = data.name;
-                            var temperatureInF = Math.round(data.main.temp);
-                            var weatherDesc = data.weather[0].description;
+// function displayCurrentWeather(weatherData) {
+//     const currentWeatherDiv = document.getElementById('current-weather');
+//     const temperatureCelsius = weatherData.main.temp;
+//     const temperatureFahrenheit = Math.round((temperatureCelsius * 9/5) + 32);
 
-                            document.getElementById('city').textContent = cityName;
-                            document.getElementById('temperature').textContent = temperatureInF + " °F";
+//     currentWeatherDiv.innerHTML = `
+//         <div class="weather-card">
+//             <h2 class="text-3xl">${weatherData.name} (${new Date(weatherData.dt * 1000).toLocaleDateString()})</h2>
+//             <img class="mx-auto" src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="weather icon">
+//             <p><span class="font-bold">Temperature:</span> ${temperatureFahrenheit}°F</p>
+//             <p><span class="font-bold">Feels like:</span> ${Math.round((weatherData.main.feels_like * 9/5) + 32)}°F</p>
+//             <p><span class="font-bold">Humidity:</span> ${weatherData.main.humidity}%</p>
+//             <p><span class="font-bold">Wind Speed:</span> ${weatherData.wind.speed}m/s</p>
+//         </div>
+//     `;
+// }
 
-                            displayWeatherDescAndCityName(temperatureInF, cityName, weatherDesc);
-                        });
+async function loadWeatherAndQuote() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            const weatherData = await getWeatherDataByLocation(latitude, longitude);
+            displayCurrentWeather(weatherData);
+
+            const category = 'happiness';
+            const quoteResponse = await fetch(`https://api.api-ninjas.com/v1/quotes?category=${category}`, {
+                headers: {
+                    'X-Api-Key': quotesApiKey
                 }
-            );
-        }
-    }
+            });
 
-    getNearestCity();
-  
-    /////////////////////////////
-    // End of Warren's section //
-    /////////////////////////////
-  });
-  
+            if (quoteResponse.ok) {
+                const quoteData = await quoteResponse.json();
+                const quote = quoteData[0].quote;
+                const author = quoteData[0].author;
+                /* document.getElementById("motivationalQuote").textContent = `"${quote}" - ${author}`; */
+                document.getElementById("motivationalQuote").innerHTML =
+                                         `<p>Quote:</p>
+                                         <q>${quote}</q> <cite>- ${author}</cite>`;
+            } else {
+                console.error('Error en la respuesta de la API de citas:', quoteResponse.statusText);
+            }
+        }, error => {
+            console.error(error);
+        });
+    } else {
+        console.error('La geolocalización no es compatible con este navegador.');
+    }
+}
+
+
+const addTaskButton = document.getElementById("addTaskButton");
+const modal = document.getElementById("modal");
+const saveTaskButton = document.getElementById("saveTask");
+const taskNameInput = document.getElementById("taskName");
+const prioritySelect = document.getElementById("priority");
+const statusSelect = document.getElementById("status");
+const taskList = document.getElementById("taskList");
+
+
+addTaskButton.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+});
+
+saveTaskButton.addEventListener("click", () => {
+    const taskName = taskNameInput.value;
+    const priority = prioritySelect.value;
+    const status = statusSelect.value;
+
+    if (taskName) {
+        const taskElement = document.createElement("div");
+        taskElement.classList.add("bg-white", "p-4", "rounded", "shadow-md", "flex", "justify-between");
+        taskElement.innerHTML = `
+            <div>
+                <h3 class="text-lg font-semibold">${taskName}</h3>
+                <p class="text-sm">${priority}</p>
+                <p class="text-sm">${status}</p>
+            </div>
+            <button class="bg-blue-500 text-white py-1 px-2 rounded edit-button">Edit</button>
+            <button class="bg-red-500 text-white py-1 px-2 rounded delete-button">Delete</button>
+        `;
+        taskList.appendChild(taskElement);
+
+        modal.classList.add("hidden");
+        taskNameInput.value = "";
+        prioritySelect.value = "most_important";
+        statusSelect.value = "not_started";
+    }
+});
+
+taskList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("edit-button")) {
+        console.log("Edit button clicked");
+    } else if (event.target.classList.contains("delete-button")) {
+        const taskElement = event.target.parentElement;
+        taskList.removeChild(taskElement);
+    }
+});
+
+taskList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("edit-button")) {
+        const taskElement = event.target.parentElement;
+        const taskName = taskElement.querySelector("h3").textContent;
+        const priority = taskElement.querySelector(".text-sm:nth-child(2)").textContent;
+        const status = taskElement.querySelector(".text-sm:last-child").textContent;
+
+        const editTaskNameInput = document.getElementById("editTaskName");
+        const editPrioritySelect = document.getElementById("editPriority");
+        const editStatusSelect = document.getElementById("editStatus");
+
+        editTaskNameInput.value = taskName;
+        editPrioritySelect.value = priority.toLowerCase().replace(' ', '_');
+        editStatusSelect.value = status.toLowerCase().replace(' ', '_');
+
+        const editModal = document.getElementById("editModal");
+        editModal.classList.remove("hidden");
+
+        const updateTaskButton = document.getElementById("updateTask");
+        updateTaskButton.addEventListener("click", () => {
+            const updatedTaskName = editTaskNameInput.value;
+            const updatedPriority = editPrioritySelect.value;
+            const updatedStatus = editStatusSelect.value;
+
+            if (updatedTaskName) {
+                taskElement.querySelector("h3").textContent = updatedTaskName;
+                taskElement.querySelector(".text-sm:nth-child(2)").textContent = updatedPriority.replace('_', ' ');
+                taskElement.querySelector(".text-sm:last-child").textContent = updatedStatus.replace('_', ' ');
+
+
+                editModal.classList.add("hidden");
+            }
+        });
+    } else if (event.target.classList.contains("delete-button")) {
+        const taskElement = event.target.parentElement;
+        taskList.removeChild(taskElement);
+    }
+});
+
+
+window.addEventListener('load', loadWeatherAndQuote);
+
+const addNoteButton = document.getElementById("addNoteButton");
+const noteModal = document.getElementById("noteModal");
+const saveNoteButton = document.getElementById("saveNote");
+const noteTextarea = document.getElementById("noteTextarea");
+const typeSelect = document.getElementById("type");
+const notesAndIdeasList = document.getElementById("notesAndIdeasList");
+
+addNoteButton.addEventListener("click", () => {
+    noteModal.classList.remove("hidden");
+});
+
+
+saveNoteButton.addEventListener("click", () => {
+    const noteText = noteTextarea.value;
+    const type = typeSelect.value;
+
+    if (noteText) {
+        const noteElement = document.createElement("div");
+        noteElement.classList.add("bg-white", "p-4", "rounded", "shadow-md", "flex", "justify-between");
+        noteElement.innerHTML = `
+            <div>
+                <p class="text-lg">${noteText}</p>
+                <p class="text-sm">${type}</p>
+            </div>
+            <button class="bg-blue-500 text-white py-1 px-2 rounded edit-button">Edit</button>
+            <button class="bg-red-500 text-white py-1 px-2 rounded delete-button">Delete</button>
+        `;
+        notesAndIdeasList.appendChild(noteElement);
+
+        noteModal.classList.add("hidden");
+        noteTextarea.value = "";
+        typeSelect.value = "note";
+    }
+});
+
+notesAndIdeasList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("edit-button")) {
+        const noteElement = event.target.parentElement;
+        const noteTextElement = noteElement.querySelector(".text-lg");
+        const typeElement = noteElement.querySelector(".text-sm");
+
+        const editNoteTextarea = document.getElementById("editNoteTextarea");
+        const editTypeSelect = document.getElementById("editType");
+
+        editNoteTextarea.value = noteTextElement.textContent;
+        editTypeSelect.value = typeElement.textContent;
+
+        const editNoteModal = document.getElementById("editNoteModal");
+        editNoteModal.classList.remove("hidden");
+
+        const updateNoteButton = document.getElementById("updateNote");
+        updateNoteButton.addEventListener("click", () => {
+            const updatedNoteText = editNoteTextarea.value;
+            const updatedType = editTypeSelect.value;
+
+            if (updatedNoteText) {
+                noteTextElement.textContent = updatedNoteText;
+                typeElement.textContent = updatedType;
+
+                editNoteModal.classList.add("hidden");
+            }
+        });
+    } else if (event.target.classList.contains("delete-button")) {
+        const noteElement = event.target.parentElement;
+        notesAndIdeasList.removeChild(noteElement);
+    }
+});
+
+// Added 'Close' button for Notes & Ideas
+const closeNoteModalButton = document.getElementById("closeNoteModal");
+
+closeNoteModalButton.addEventListener("click", () => {
+    noteModal.classList.add("hidden");
+    noteTextarea.value = "";
+    typeSelect.value = "note";
+});
+
+// Added 'Close' button for Task List
+const closeTaskModalButton = document.getElementById("closeTaskModal");
+closeTaskModalButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    taskNameInput.value = "";
+    prioritySelect.value = "most_important";
+    statusSelect.value = "not_started";
+});
