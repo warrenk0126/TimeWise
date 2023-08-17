@@ -61,75 +61,72 @@
 
 
 <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-6 rounded shadow-md w-80">
-        <h2 class="text-xl font-semibold mb-4">Add Task</h2>
-        <input id="taskName" type="text" class="border rounded mb-2 p-2 w-full" placeholder="Task Name">
+  <div class="bg-white p-6 rounded shadow-md w-80">
+      <h2 class="text-xl font-semibold mb-4">Add Task</h2>
+      <input id="taskName" type="text" class="border rounded mb-2 p-2 w-full" placeholder="Task Name">
 
-        <select id="priority" class="border rounded mb-2 p-2 w-full">
-            <option value="most_important">Most Important Task</option>
-            <option value="secondary">Secondary Task</option>
-            <option value="additional">Additional Task</option>
-        </select>
+      <select id="priority" class="border rounded mb-2 p-2 w-full">
+          <option value="most_important">Most Important Task</option>
+          <option value="secondary">Secondary Task</option>
+          <option value="additional">Additional Task</option>
+      </select>
 
-        <select id="status" class="border rounded mb-4 p-2 w-full">
-            <option value="not_started">Not Started</option>
-            <option value="completed">Completed</option>
-            <option value="delegate">Delegate</option>
-            <option value="delete">Delete</option>
-            <option value="in_progress">In Progress</option>
-        </select>
+      <select id="status" class="border rounded mb-4 p-2 w-full">
+          <option value="not_started">Not Started</option>
+          <option value="completed">Completed</option>
+          <option value="delegate">Delegate</option>
+          <option value="delete">Delete</option>
+          <option value="in_progress">In Progress</option>
+      </select>
 
-        <button id="saveTask" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Save Task</button>
-    </div>
+      <button id="saveTask" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Save Task</button>
+      <button id="closeTaskModal" class="bg-gray-500 text-white py-2 px-4 rounded w-full mt-2">Close</button>
+  </div>
 </div>
 
 <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-6 rounded shadow-md w-80">
-        <h2 class="text-xl font-semibold mb-4">Edit Task</h2>
-        <input id="editTaskName" type="text" class="border rounded mb-2 p-2 w-full" placeholder="Task Name">
+  <div class="bg-white p-6 rounded shadow-md w-80">
+      <h2 class="text-xl font-semibold mb-4">Edit Task</h2>
+      <input id="editTaskName" type="text" class="border rounded mb-2 p-2 w-full" placeholder="Task Name">
 
-        <select id="editPriority" class="border rounded mb-2 p-2 w-full">
-            <option value="most_important">Most Important Task</option>
-            <option value="secondary">Secondary Task</option>
-            <option value="additional">Additional Task</option>
-        </select>
+      <select id="editPriority" class="border rounded mb-2 p-2 w-full">
+          <option value="most_important">Most Important Task</option>
+          <option value="secondary">Secondary Task</option>
+          <option value="additional">Additional Task</option>
+      </select>
 
-        <select id="editStatus" class="border rounded mb-4 p-2 w-full">
-            <option value="not_started">Not Started</option>
-            <option value="completed">Completed</option>
-            <option value="delegate">Delegate</option>
-            <option value="delete">Delete</option>
-            <option value="in_progress">In Progress</option>
-        </select>
+      <select id="editStatus" class="border rounded mb-4 p-2 w-full">
+          <option value="not_started">Not Started</option>
+          <option value="completed">Completed</option>
+          <option value="delegate">Delegate</option>
+          <option value="delete">Delete</option>
+          <option value="in_progress">In Progress</option>
+      </select>
 
-        <button id="updateTask" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Update Task</button>
-    </div>
+      <button id="updateTask" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Update Task</button>
+      <button id="closeEditModal" class="bg-gray-500 text-white py-2 px-4 rounded w-full mt-2">Close</button>
+  </div>
 </div>
-
-<!-- <div class="toggle-button-container fixed bottom-4 right-4 z-10">
-    <button id="theme-toggle" class="bg-gray-500 text-white py-2 px-4 rounded">Toggle Theme</button>
-</div> -->
-
 
 <div id="noteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-6 rounded shadow-md w-80">
-        <h2 class="text-xl font-semibold mb-4">Add Note or Idea</h2>
-        <textarea id="noteTextarea" class="border rounded mb-2 p-2 w-full" placeholder="Note or Idea"></textarea>
+  <div class="bg-white p-6 rounded shadow-md w-80">
+      <h2 class="text-xl font-semibold mb-4">Add Note or Idea</h2>
+      <textarea id="noteTextarea" class="border rounded mb-2 p-2 w-full" placeholder="Note or Idea"></textarea>
 
-        <select id="type" class="border rounded mb-4 p-2 w-full">
-            <option value="note">Note</option>
-            <option value="idea">Idea</option>
-        </select>
+      <select id="type" class="border rounded mb-4 p-2 w-full">
+          <option value="note">Note</option>
+          <option value="idea">Idea</option>
+      </select>
 
-        <button id="saveNote" class="bg-green-500 text-white py-2 px-4 rounded w-full">Save Note or Idea</button>
-    </div>
+      <button id="saveNote" class="bg-green-500 text-white py-2 px-4 rounded w-full">Save Note or Idea</button>
+      <button id="closeNoteModal" class="bg-gray-500 text-white py-2 px-4 rounded w-full mt-2">Close</button>
+  </div>
 </div>
-
 
 <div class="toggle-button-container fixed bottom-4 right-4 z-10">
-    <button id="theme-toggle" class="bg-gray-500 text-white py-2 px-4 rounded">Toggle Theme</button>
+  <button id="theme-toggle" class="bg-gray-500 text-white py-2 px-4 rounded">Toggle Theme</button>
 </div>
 
-    <script src="./assets/js/script.js"></script>
+<script src="./assets/js/script.js"></script>
 </body>
 </html>

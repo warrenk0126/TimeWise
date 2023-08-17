@@ -242,9 +242,20 @@ notesAndIdeasList.addEventListener("click", (event) => {
     }
 });
 
+// Added 'Close' button for Notes & Ideas
+const closeNoteModalButton = document.getElementById("closeNoteModal");
 
+closeNoteModalButton.addEventListener("click", () => {
+    noteModal.classList.add("hidden");
+    noteTextarea.value = "";
+    typeSelect.value = "note";
+});
 
-
-
-
-
+// Added 'Close' button for Task List
+const closeTaskModalButton = document.getElementById("closeTaskModal");
+closeTaskModalButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    taskNameInput.value = "";
+    prioritySelect.value = "most_important";
+    statusSelect.value = "not_started";
+});
