@@ -1,4 +1,74 @@
 /* .w-1\/2 {
     width: 50%;
     margin-left: 0;
-} */
+} *//* Light Theme */
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+    background-image: url('/assets/images/logo-white\ \(1\).png');
+    background-size: auto 150px; /* Adjust the size as needed */
+    background-repeat: no-repeat;
+    background-position: 10px 10px; /* Adjust the positioning as needed */
+    background-clip: content-box; /* Prevent the background from extending into padding and border areas */
+    padding-top: 40px; /* Add some padding to make space for the logo */
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    background-image: url('/assets/images/logo-white\ \(1\).png');
+    background-size: auto 150px; /* Adjust the size as needed */
+    background-repeat: no-repeat;
+    background-position: 10px 10px; /* Adjust the positioning as needed */
+    background-clip: content-box; /* Prevent the background from extending into padding and border areas */
+    padding-top: 40px; /* Add some padding to make space for the logo */
+}
+
+
+body.dark-theme::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px; /* Adjust the width to align with the logo's positioning */
+    height: 30px; /* Adjust the height to match the logo's height */
+}
+
+
+/* Adjust text color for notes and tasks in dark mode */
+body.dark-theme .bg-white {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+/* Adjust select options color for specific values in dark mode */
+body.dark-theme select,
+body.dark-theme select option {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+/* Adjust user input visibility in select and textarea for both light and dark modes */
+#modal select,
+#noteModal select,
+#modal textarea,
+#noteModal textarea {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Adjust user input visibility in input, select, and textarea for both light and dark modes */
+#modal input,
+#modal select,
+#noteModal input,
+#noteModal select,
+#editModal input,
+#editModal select,
+#modal textarea,
+#noteModal textarea,
+#editModal textarea {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+

@@ -2,7 +2,7 @@ const apiKey = 'b8e76533d49342768241dd6ce39ca8e7';
 const quotesApiKey = '6hjR+Z+iplIV9VL+StaaLg==jQnN6wcPkiNSWZDy';
 
 async function getWeatherDataByLocation(latitude, longitude) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -10,36 +10,18 @@ async function getWeatherDataByLocation(latitude, longitude) {
 
 function displayCurrentWeather(weatherData) {
     const currentWeatherDiv = document.getElementById('current-weather');
-    const temperatureFahrenheit = Math.round(weatherData.main.temp);
-
     currentWeatherDiv.innerHTML = `
         <div class="weather-card">
             <h2 class="text-3xl">${weatherData.name} (${new Date(weatherData.dt * 1000).toLocaleDateString()})</h2>
             <img class="mx-auto" src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="weather icon">
-            <p><span class="font-bold">Temperature:</span> ${temperatureFahrenheit}°F</p>
-            <p><span class="font-bold">Feels like:</span> ${Math.round(weatherData.main.feels_like)}°F</p> 
+            <p><span class="font-bold">Temperature:</span> ${weatherData.main.temp}°C</p>
+            <p><span class="font-bold">Feels like:</span> ${weatherData.main.feels_like}°C</p>
             <p><span class="font-bold">Humidity:</span> ${weatherData.main.humidity}%</p>
             <p><span class="font-bold">Wind Speed:</span> ${weatherData.wind.speed}m/s</p>
         </div>
     `;
 }
 
-// function displayCurrentWeather(weatherData) {
-//     const currentWeatherDiv = document.getElementById('current-weather');
-//     const temperatureCelsius = weatherData.main.temp;
-//     const temperatureFahrenheit = Math.round((temperatureCelsius * 9/5) + 32);
-
-//     currentWeatherDiv.innerHTML = `
-//         <div class="weather-card">
-//             <h2 class="text-3xl">${weatherData.name} (${new Date(weatherData.dt * 1000).toLocaleDateString()})</h2>
-//             <img class="mx-auto" src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="weather icon">
-//             <p><span class="font-bold">Temperature:</span> ${temperatureFahrenheit}°F</p>
-//             <p><span class="font-bold">Feels like:</span> ${Math.round((weatherData.main.feels_like * 9/5) + 32)}°F</p>
-//             <p><span class="font-bold">Humidity:</span> ${weatherData.main.humidity}%</p>
-//             <p><span class="font-bold">Wind Speed:</span> ${weatherData.wind.speed}m/s</p>
-//         </div>
-//     `;
-// }
 
 async function loadWeatherAndQuote() {
     if (navigator.geolocation) {
@@ -75,6 +57,32 @@ async function loadWeatherAndQuote() {
         console.error('La geolocalización no es compatible con este navegador.');
     }
 }
+// Get the theme toggle element
+const themeToggle = document.getElementById('theme-toggle');
+
+// Add a click event listener to the theme toggle button
+themeToggle.addEventListener('click', () => {
+    // Toggle between dark and light themes on the document body
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.toggle('light-theme');
+
+    // Determine the current theme and save it in localStorage
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    try {
+        localStorage.setItem('theme', currentTheme);
+    } catch (error) {
+        console.error('Failed to save theme preference:', error);
+    }
+});
+
+// Retrieve the user's preferred theme from localStorage
+const savedTheme = localStorage.getItem('theme');
+
+// Check if a preferred theme is stored and apply it to the document body
+if (savedTheme) {
+    document.body.classList.add(savedTheme + '-theme');
+}
+
 
 
 const addTaskButton = document.getElementById("addTaskButton");
@@ -177,7 +185,6 @@ const notesAndIdeasList = document.getElementById("notesAndIdeasList");
 addNoteButton.addEventListener("click", () => {
     noteModal.classList.remove("hidden");
 });
-
 
 saveNoteButton.addEventListener("click", () => {
     const noteText = noteTextarea.value;
