@@ -5,7 +5,7 @@
 body.light-theme {
     background-color: #ffffff;
     color: #000000;
-    background-image: url('/assets/images/logo-white\ .png');
+    background-image: url('/assets/images/logo-white\ \(1\).png');
     background-size: auto 150px; /* Adjust the size as needed */
     background-repeat: no-repeat;
     background-position: 10px 10px; /* Adjust the positioning as needed */
@@ -17,7 +17,7 @@ body.light-theme {
 body.dark-theme {
     background-color: #1a1a1a;
     color: #ffffff;
-    background-image: url('/assets/images/logo-white\ .png');
+    background-image: url('/assets/images/logo-white\ \(1\).png');
     background-size: auto 150px; /* Adjust the size as needed */
     background-repeat: no-repeat;
     background-position: 10px 10px; /* Adjust the positioning as needed */
