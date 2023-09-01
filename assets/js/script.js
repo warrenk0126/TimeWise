@@ -1,27 +1,32 @@
 const apiKey = 'b8e76533d49342768241dd6ce39ca8e7';
 const quotesApiKey = '6hjR+Z+iplIV9VL+StaaLg==jQnN6wcPkiNSWZDy';
 
-async function getWeatherDataByLocation(latitude, longitude) {
+function getWeatherDataByLocation(latitude, longitude) {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => data);
+}
+
+function celsiusToFahrenheit(celsius) {
+    return Math.round((celsius * 9/5) + 32);
 }
 
 function displayCurrentWeather(weatherData) {
     const currentWeatherDiv = document.getElementById('current-weather');
+    const temperatureFahrenheit = celsiusToFahrenheit(weatherData.main.temp);
+    
     currentWeatherDiv.innerHTML = `
         <div class="weather-card">
             <h2 class="text-3xl">${weatherData.name} (${new Date(weatherData.dt * 1000).toLocaleDateString()})</h2>
             <img class="mx-auto" src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="weather icon">
-            <p><span class="font-bold">Temperature:</span> ${weatherData.main.temp}°C</p>
-            <p><span class="font-bold">Feels like:</span> ${weatherData.main.feels_like}°C</p>
+            <p><span class="font-bold">Temperature:</span> ${temperatureFahrenheit}°F</p>
+            <p><span class="font-bold">Feels like:</span> ${celsiusToFahrenheit(weatherData.main.feels_like)}°F</p>
             <p><span class="font-bold">Humidity:</span> ${weatherData.main.humidity}%</p>
             <p><span class="font-bold">Wind Speed:</span> ${weatherData.wind.speed}m/s</p>
         </div>
     `;
 }
-
 
 async function loadWeatherAndQuote() {
     if (navigator.geolocation) {

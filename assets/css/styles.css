@@ -25,16 +25,6 @@ body.dark-theme {
     padding-top: 40px; /* Add some padding to make space for the logo */
 }
 
-
-body.dark-theme::before {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 10px; /* Adjust the width to align with the logo's positioning */
-    height: 30px; /* Adjust the height to match the logo's height */
-}
-
-
 /* Adjust text color for notes and tasks in dark mode */
 body.dark-theme .bg-white {
     background-color: #2d2d2d;
